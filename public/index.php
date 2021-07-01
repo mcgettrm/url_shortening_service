@@ -16,7 +16,10 @@ $container = $app->getContainer();
 
 //UrlShortener Service
 $container[UrlShortenerService::class] = function($container){
-    return new UrlShortenerService();
+    $shortLinkRepository = $container[ShortLinkRepository::class];
+    return new UrlShortenerService(
+        $shortLinkRepository
+    );
 };
 
 //Url Validator
@@ -33,21 +36,30 @@ $container[ShortLinkRepository::class] = function($container){
 //Register routes
 $app->get('/', function (Request $request, Response $response, array $args) {
     $response->getBody()->write("Hello world");
-
     return $response;
 });
 
 $app->post('/shortener/encode',function(Request $request, Response $response, array $args){
-    $urlToEncode = $args['urlToEncode'] ?? null;
-    $response->getBody()->write("Encoding");
-    return $response;
+
+    /** @var UrlShortenerService $urlShortenerService */
+    $urlShortenerService = $this->get(UrlShortenerService::class);
+    $data = array(
+        'shortenedUrl' => 'abc.com/short'
+    );
+    $jsonResponse = $response->withJson($data, 201);
+    return $jsonResponse;
 });
 
-$app->get('/shortener/decode',function(Request $request, Response $response, array $args){
-    $response->getBody()->write("Decoding");
-    $repository = $this->get(ShortLinkRepository::class);
-    $shortenerService = $this->get(UrlShortenerService::class);
+$app->post('/shortener/decode',function(Request $request, Response $response, array $args){
 
-    return $response;
+    /** @var UrlShortenerService $urlShortenerService */
+    $urlShortenerService = $this->get(UrlShortenerService::class);
+
+    /** @var UrlValidator $urlValidator */
+    $urlValidator = $this->get(UrlValidator::class);
+
+    $data = array('name' => 'Bob', 'age' => 40);
+    $jsonResponse = $response->withJson($data, 200);
+    return $jsonResponse;
 });
 $app->run();
