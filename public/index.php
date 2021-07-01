@@ -1,14 +1,15 @@
 <?php
 
-use DomainObjects\Services\UrlShortenerService;
-use DomainObjects\Services\UrlValidator;
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-use Repositories\ShortLinkRepository;
+use UrlShortener\DomainObjects\Services\UrlShortenerService;
+use UrlShortener\DomainObjects\Services\UrlValidator;
+use UrlShortener\Repositories\ShortLinkRepository;
 
 require '../vendor/autoload.php';
 
-$app = new \Slim\App;
+$container = new \Slim\Container;
+$app = new \Slim\App($container);
 
 //Register services
 $container = $app->getContainer();
@@ -44,6 +45,8 @@ $app->post('/shortener/encode',function(Request $request, Response $response, ar
 
 $app->get('/shortener/decode',function(Request $request, Response $response, array $args){
     $response->getBody()->write("Decoding");
+    $repository = $this->get(ShortLinkRepository::class);
+    $shortenerService = $this->get(UrlShortenerService::class);
 
     return $response;
 });

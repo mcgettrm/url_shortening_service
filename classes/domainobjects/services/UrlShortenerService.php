@@ -1,5 +1,5 @@
 <?php
-namespace DomainObjects\Services;
+namespace UrlShortener\DomainObjects\Services;
 
 class UrlShortenerService
 {

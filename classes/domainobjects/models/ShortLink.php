@@ -1,5 +1,5 @@
 <?php
-namespace Models;
+namespace UrlShortener\DomainObjects\Models;
 
 class ShortLink
 {

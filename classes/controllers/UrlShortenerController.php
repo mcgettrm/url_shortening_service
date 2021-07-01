@@ -1,5 +1,5 @@
 <?php
-namespace Controllers;
+namespace UrlShortener\Controllers;
 
 class UrlShortenerController
 {

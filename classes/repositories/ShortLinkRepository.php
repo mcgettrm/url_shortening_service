@@ -1,5 +1,5 @@
 <?php
-namespace Repositories;
+namespace UrlShortener\Repositories;
 
 class ShortLinkRepository
 {
