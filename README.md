@@ -19,6 +19,7 @@ Lucid Chart UML: https://lucid.app/lucidchart/invitations/accept/inv_64e3405f-7b
 
 # Dependencies
 The host system will need composer installed in order to facilitation installation of the software.
+PHP 7.4.x
 
 # Technical Notes
 - Runs using slim framework.

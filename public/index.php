@@ -1,7 +1,10 @@
 <?php
 
+use DomainObjects\Services\UrlShortenerService;
+use DomainObjects\Services\UrlValidator;
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
+use Repositories\ShortLinkRepository;
 
 require '../vendor/autoload.php';
 
@@ -29,6 +32,18 @@ $container[ShortLinkRepository::class] = function($container){
 //Register routes
 $app->get('/', function (Request $request, Response $response, array $args) {
     $response->getBody()->write("Hello world");
+
+    return $response;
+});
+
+$app->post('/shortener/encode',function(Request $request, Response $response, array $args){
+    $urlToEncode = $args['urlToEncode'] ?? null;
+    $response->getBody()->write("Encoding");
+    return $response;
+});
+
+$app->get('/shortener/decode',function(Request $request, Response $response, array $args){
+    $response->getBody()->write("Decoding");
 
     return $response;
 });
