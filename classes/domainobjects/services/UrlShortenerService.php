@@ -18,13 +18,26 @@ class UrlShortenerService
     }
 
     /**
+     * @param string $inputString
+     * @return string|bool
+     */
+    private function generateIdentifierFromString(string $inputString):string
+    {
+        $base64Encoded = base64_encode($inputString);
+        $identifier = substr($base64Encoded, 0,$this->config->getIdentifierLength());
+        return $identifier;
+    }
+
+    /**
      * Takes an unencoded, long URL and returns an encoded, short URL that is compatible with the decode method
      * of this class.
      * @param string $urlToEncode
      * @return string
      */
     public function encode(string $urlToEncode):string{
-        return $this->config->getSiteBaseUrl(). '/';
+
+        $encodedUrl = $this->config->getSiteBaseUrl() . '/' . $this->generateIdentifierFromString($urlToEncode);
+        return $encodedUrl;
     }
 
     /**

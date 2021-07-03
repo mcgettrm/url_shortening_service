@@ -62,7 +62,8 @@ $app->post('/api/shortener/encode',function(Request $request, Response $response
     //Get UrlShortenerController
     /** @var UrlShortenerController $urlShortenerController */
     $urlShortenerController = $this->get(UrlShortenerController::class);
-    $urlToEncode = $args['urlToEncode'] ?? "";
+    $body = $request->getParsedBody();
+    $urlToEncode = $body['urlToEncode'] ?? "";
 
     return $urlShortenerController->encode($urlToEncode, $response);
 });

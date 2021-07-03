@@ -12,6 +12,8 @@ use UrlShortener\Config;
  * - Should return a string CONFIG_DOMAIN_NAME at the beginning to the caller. [DONE]
  * - IDENTIFIER should be a valid HTTP URL.
  * - Encoded URL should have only one /
+ * - Should be saved in persistence
+ * - Does not save in persistence if the identifier already exists (identifier is unique)
  */
 class EncodeTest extends TestCase
 {
@@ -70,19 +72,24 @@ class EncodeTest extends TestCase
     }
 
     public function testEncodeReturnsStringWithConfigCharacterLengthIdentifierAtTheEnd(){
-        $identifierLength = 6;
-        $config = $this->getConfig(null,$identifierLength);
-        $shorteningService = $this->getGenericUrlShorteningService($config);
+        $identifierLengths = [5,6,7,8];
 
-        foreach($this->testUrls as $urlToEncode){
-            $encodedUrl = $shorteningService->encode($urlToEncode);
+        foreach($identifierLengths as $identifierLength){
+            $config = $this->getConfig(null,$identifierLength);
+            $shorteningService = $this->getGenericUrlShorteningService($config);
 
-            //7th character from the end should be a '/'
-            $parts = explode($encodedUrl, '/');
+            foreach($this->testUrls as $urlToEncode){
+                $encodedUrl = $shorteningService->encode($urlToEncode);
 
-            $this->assertTrue(isset($parts[1]));
-            $this->assertEquals($identifierLength,strlen($parts[1]));
+                //7th character from the end should be a '/'
+                $parts = explode('/',$encodedUrl);
+
+                $this->assertTrue(isset($parts[1]));
+
+                $this->assertEquals($identifierLength,strlen($parts[1]));
+            }
         }
+
     }
 
 }

@@ -15,6 +15,13 @@ class Config
     }
 
     public function getSiteBaseUrl():string{
+        //If base URL ends with /
+        if(substr($this->baseUrl, -1) === "/"){
+
+            //It does, remove it.
+            $baseUrl = substr($this->baseUrl,0, -1) ;
+            return $baseUrl;
+        }
         return $this->baseUrl;
     }
 
