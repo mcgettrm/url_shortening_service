@@ -19,17 +19,29 @@ class UrlShortenerService
     }
 
     /**
+     * Takes the unique identifier from a URL
+     * @param $encodedUrl
+     * @return false|string
+     */
+    private function getIdentifierFromEncodedUrl($encodedUrl){
+        $identifier = substr($encodedUrl, strrpos($encodedUrl, '/') + 1);
+        return $identifier;
+    }
+
+    /**
      * @param string $inputString
      * @param int $offset
      * @return string
      */
     private function generateIdentifierFromString(string $inputString, int $offset):string
     {
-
         $md5Encoded = md5($inputString);
         $base64Md5Encoded = base64_encode($md5Encoded);
+        $urlSafe = str_replace(['/','+','='],'',$base64Md5Encoded);
 
-        if(($offset + $this->config->getIdentifierLength()) > strlen($base64Md5Encoded)){
+        //TODO::Ways to reduce collision chance
+        //Outside chance that we have had so many collisions that we run out of string. Time to admit there's an error.
+        if(($offset + $this->config->getIdentifierLength()) > strlen($urlSafe)){
             return false;
         }
         $identifier = substr($base64Md5Encoded, $offset,$this->config->getIdentifierLength());
@@ -105,7 +117,12 @@ class UrlShortenerService
      * @return string
      */
     public function decode(string $urlToDecode):string{
-        $decodedUrl = "test";
-        return $decodedUrl;
+        $identifier = $this->getIdentifierFromEncodedUrl($urlToDecode);
+        $shortLink = $this->shortLinkRepository->read($identifier);
+        if($shortLink === false){
+            return false;
+        } else {
+            return $shortLink->getLongUrl();
+        }
     }
 }

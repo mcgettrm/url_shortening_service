@@ -12,7 +12,7 @@ use UrlShortener\DomainObjects\Models\ShortLink;
  * - Should be saved in persistence
  * - Does not save in persistence if the identifier already exists (identifier is unique)
  */
-class EncodeTest extends TestCase
+class EncodeTest extends AbstractUrlShortenerServiceTest
 {
     private $genericBaseUrl = "my_base_url.co.uk";
 
@@ -28,32 +28,7 @@ class EncodeTest extends TestCase
         return $identifier;
     }
 
-    private function getGenericUrlShorteningService(Config $config, $shortLinkRepository = null){
 
-        if(!$shortLinkRepository){
-            $shortLinkRepository = $this->createMock(\UrlShortener\Repositories\ShortLinkRepository::class);
-            $shortLinkRepository->method('read')->willReturn(false);
-        }
-
-        $shorteningService = new \UrlShortener\DomainObjects\Services\UrlShortenerService(
-            $config,
-            $shortLinkRepository
-        );
-
-        return $shorteningService;
-    }
-
-    private function getConfig($baseServerUrl = null, $identifierLength = null){
-        $config = new Config();
-        if($identifierLength){
-            $config->setIdentifierLength($identifierLength);
-        }
-
-        if($baseServerUrl){
-            $config->setBaseUrl($baseServerUrl);
-        }
-        return $config;
-    }
 
     public function testEncodeReturnsDomainName(): void
     {

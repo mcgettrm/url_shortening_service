@@ -14,12 +14,16 @@ use PHPUnit\Framework\TestCase;
  * - If a short URL is passed that has an incorrect CONFIG_DOMAIN_NAME, fail and return status code 400
  *
  */
-class DecodeTest extends TestCase
+class DecodeTest extends AbstractUrlShortenerServiceTest
 {
 
-    public function testTest(): void
+    private $genericDecodeString = "http://url_shortening_service/YTlkMT";
+    public function testReturnsLongUrlIfIdentifierFoundInRepository(): void
     {
-        $this->assertEquals(1,1);
+        $config = $this->getConfig();
+        $shortenerService = $this->getGenericUrlShorteningService($config);
+
+        $this->assertEquals(1,$shortenerService->decode($this->genericDecodeString));
     }
 
 }

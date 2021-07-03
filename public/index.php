@@ -68,13 +68,13 @@ $app->post('/api/shortener/encode',function(Request $request, Response $response
     return $urlShortenerController->encode($urlToEncode, $response);
 });
 
-$app->get('/api/shortener/decode',function(Request $request, Response $response, array $args){
+$app->post('/api/shortener/decode',function(Request $request, Response $response, array $args){
 
     //Get UrlShortenerController
     /** @var UrlShortenerController $urlShortenerController */
     $urlShortenerController = $this->get(UrlShortenerController::class);
-
-    $urlToDecode = $args['urlToEncode'] ?? "";
+    $body = $request->getParsedBody();
+    $urlToDecode = $body['urlToEncode'] ?? "";
 
     return $urlShortenerController->decode($urlToDecode, $response);
 });
