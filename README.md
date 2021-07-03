@@ -20,6 +20,9 @@ Lucid Chart UML: https://lucid.app/lucidchart/invitations/accept/inv_64e3405f-7b
 - Should accept the IDENTIFIER with or without the CONFIG_URL
 - Should return the original LONG_URL on success (or return status code 404).
 - Should only accept SHORT_URL from the CONFIG_DOMAIN_NAME
+- If a short URL is passed that has an incorrect CONFIG_DOMAIN_NAME, fail and return status code 400 
+
+- A URL encoded by the Encode endpoint should be a valid input for the Decode method.
 
 # Installation Instructions
 1. Copy the source code from the git repository into the desired installation folder.

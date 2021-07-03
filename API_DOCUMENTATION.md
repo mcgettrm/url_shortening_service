@@ -5,7 +5,7 @@ Welcome to the URL Shortening Service API Documentation
 Accepts a URL in its request body, encodes it and returns a shortened URL consisting of the site's base URL and a unique, 6 character query string
 that can then be decoded by the Decode method of this API.
 
-**URL**: `/api/encode`
+**URL**: `/api/shortener/encode`
 
 **Method**: `POST`
 
@@ -37,7 +37,7 @@ that can then be decoded by the Decode method of this API.
 ## Decode
 Accepts a full URL or a 6 character identifier provided by the Encode function of the API and returns the original long URL used to generate it.
 
-**URL**: `/api/decode`
+**URL**: `/api/shortener/decode`
 
 **Method**: `GET`
 

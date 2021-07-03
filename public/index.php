@@ -39,18 +39,27 @@ $app->get('/', function (Request $request, Response $response, array $args) {
     return $response;
 });
 
-$app->post('/shortener/encode',function(Request $request, Response $response, array $args){
+$app->post('/api/shortener/encode',function(Request $request, Response $response, array $args){
 
+    //TODO::Move to Controller
+    $urlToEncode = $args['urlToEncode'];
+
+    //Validate
+    /** @var UrlValidator $urlValidator */
+    $urlValidator = $this->get(UrlValidator::class);
+    $urlValidator->
+
+    //Encode
     /** @var UrlShortenerService $urlShortenerService */
     $urlShortenerService = $this->get(UrlShortenerService::class);
     $data = array(
-        'shortenedUrl' => 'abc.com/short'
+        'shortenedUrl' => $urlShortenerService->encode($urlToEncode)
     );
     $jsonResponse = $response->withJson($data, 201);
     return $jsonResponse;
 });
 
-$app->post('/shortener/decode',function(Request $request, Response $response, array $args){
+$app->post('/api/shortener/decode',function(Request $request, Response $response, array $args){
 
     /** @var UrlShortenerService $urlShortenerService */
     $urlShortenerService = $this->get(UrlShortenerService::class);
