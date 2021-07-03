@@ -20,22 +20,24 @@ class ShortLinkRepository
      * Saves data array to persistant storage
      */
     private function persist(){
-
+        $this->shortLinksArray;
     }
 
-    public function create(){
-
+    public function create(string $identifier,string $longUrl,string $shortUrl){
+        $this->shortLinksArray[] = [$identifier,$longUrl, $shortUrl];
+        $this->persist();
     }
 
-    public function read(){
-
+    public function read(string $identifier): ShortLink{
+        $shortLink = new ShortLink();
+        return $shortLink;
     }
 
-    public function update(){
-
+    public function update(ShortLink $shortLink):bool{
+        return true;
     }
 
-    public function delete(){
-
+    public function delete(ShortLink $shortLink):bool{
+        return true;
     }
 }

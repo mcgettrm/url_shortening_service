@@ -18,7 +18,7 @@ that can then be decoded by the Decode method of this API.
 **Content**:
 ``` 
 {
-   shortUrl: <ENCODED_URL>
+   encodedUrl: <ENCODED_URL>
 } 
 ```
 
@@ -37,9 +37,11 @@ that can then be decoded by the Decode method of this API.
 ## Decode
 Accepts a full URL or a 6 character identifier provided by the Encode function of the API and returns the original long URL used to generate it.
 
-**URL**: `/api/shortener/decode`
+**URL**: `/api/shortener/decode?urlToDecode=<URL_TO_DECODE>`
 
 **Method**: `GET`
+
+**Parameters**: `urlToDecode` where the URL to decode is the IDENTIFIER.
 
 ### RESPONSE (SUCCESS):
 
@@ -50,7 +52,7 @@ Accepts a full URL or a 6 character identifier provided by the Encode function o
 **Content**:
 ``` 
 {
-   longURL: <DECODED_URL>
+   decodedURL: <DECODED_URL>
 } 
 ```
 

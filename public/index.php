@@ -2,6 +2,7 @@
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
+use UrlShortener\Controllers\UrlShortenerController;
 use UrlShortener\DomainObjects\Services\UrlShortenerService;
 use UrlShortener\DomainObjects\Services\UrlValidator;
 use UrlShortener\Repositories\ShortLinkRepository;
@@ -14,7 +15,16 @@ $app = new \Slim\App($container);
 //Register services
 $container = $app->getContainer();
 
-//UrlShortener Service
+//Controllers
+$container[UrlShortenerController::class] = function($container){
+    return new UrlShortenerController(
+        $container[UrlShortenerService::class],
+        $container[UrlValidator::class]
+    );
+};
+
+
+//Services
 $container[UrlShortenerService::class] = function($container){
     $shortLinkRepository = $container[ShortLinkRepository::class];
     return new UrlShortenerService(
@@ -22,53 +32,35 @@ $container[UrlShortenerService::class] = function($container){
     );
 };
 
-//Url Validator
 $container[UrlValidator::class] = function($container){
     return new UrlValidator();
 };
 
-//Repository
+//Repositories
 $container[ShortLinkRepository::class] = function($container){
     return new ShortLinkRepository();
 };
 
 
 //Register routes
-$app->get('/', function (Request $request, Response $response, array $args) {
-    $response->getBody()->write("Hello world");
-    return $response;
-});
-
 $app->post('/api/shortener/encode',function(Request $request, Response $response, array $args){
 
-    //TODO::Move to Controller
-    $urlToEncode = $args['urlToEncode'];
+    //Get UrlShortenerController
+    /** @var UrlShortenerController $urlShortenerController */
+    $urlShortenerController = $this->get(UrlShortenerController::class);
+    $urlToEncode = $args['urlToEncode'] ?? "";
 
-    //Validate
-    /** @var UrlValidator $urlValidator */
-    $urlValidator = $this->get(UrlValidator::class);
-    $urlValidator->
-
-    //Encode
-    /** @var UrlShortenerService $urlShortenerService */
-    $urlShortenerService = $this->get(UrlShortenerService::class);
-    $data = array(
-        'shortenedUrl' => $urlShortenerService->encode($urlToEncode)
-    );
-    $jsonResponse = $response->withJson($data, 201);
-    return $jsonResponse;
+    return $urlShortenerController->encode($urlToEncode, $response);
 });
 
-$app->post('/api/shortener/decode',function(Request $request, Response $response, array $args){
+$app->get('/api/shortener/decode',function(Request $request, Response $response, array $args){
 
-    /** @var UrlShortenerService $urlShortenerService */
-    $urlShortenerService = $this->get(UrlShortenerService::class);
+    //Get UrlShortenerController
+    /** @var UrlShortenerController $urlShortenerController */
+    $urlShortenerController = $this->get(UrlShortenerController::class);
 
-    /** @var UrlValidator $urlValidator */
-    $urlValidator = $this->get(UrlValidator::class);
+    $urlToDecode = $args['urlToEncode'] ?? "";
 
-    $data = array('name' => 'Bob', 'age' => 40);
-    $jsonResponse = $response->withJson($data, 200);
-    return $jsonResponse;
+    return $urlShortenerController->decode($urlToDecode, $response);
 });
 $app->run();
