@@ -97,7 +97,18 @@ class EncodeTest extends TestCase
 
         $shorteningService = $this->getGenericUrlShorteningService($config, $shortLinkRepository);
         $encodedUrl = $shorteningService->encode($this->genericTestUrl);
+    }
 
+    public function testRepositoryAskedIfARecordAlreadyExists(){
+        $config = $this->getConfig($this->genericBaseUrl);
+        $shortLinkRepository = $this->createMock(\UrlShortener\Repositories\ShortLinkRepository::class);
+
+        //If read returns an instance of ShortLink
+        $shortLinkRepository->expects($this->once())->method('read');
+
+
+        $shorteningService = $this->getGenericUrlShorteningService($config, $shortLinkRepository);
+        $encodedUrl = $shorteningService->encode($this->genericTestUrl);
     }
 
 }
