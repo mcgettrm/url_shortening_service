@@ -9,6 +9,9 @@ I'm attaching the Lucid Chart pdf UML that I drew up so that you have an idea of
 
 I hope you enjoy reviewing this as much as I enjoyed tinkering with it. 
 
+# DOCUMENTATION
+Please find supporting documentation in the `misc` folder for your perusal. 
+
 # Important links
 Git Repository: https://github.com/mcgettrm/url_shortening_service
 Lucid Chart UML: https://lucid.app/lucidchart/invitations/accept/inv_64e3405f-7bcd-4445-b17b-a7b491e9b343?viewport_loc=-11%2C-11%2C2219%2C1065%2C0_0
