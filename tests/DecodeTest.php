@@ -6,11 +6,9 @@ use UrlShortener\DomainObjects\Models\ShortLink;
  * Class DecodeTest
  *
  * This class should cover the following scenarios
- * - Should accept an IDENTIFIER.
- * - Should accept the IDENTIFIER with or without the CONFIG_URL
+ * - Should accept the IDENTIFIER with or without the CONFIG_URL [DONE]
  * - Should return the original LONG_URL [DONE].
- * - Should only accept SHORT_URL from the CONFIG_DOMAIN_NAME
- * - If a short URL is passed that has an incorrect CONFIG_DOMAIN_NAME, fail and return status code 400
+ * - If a short URL is passed that has an incorrect CONFIG_DOMAIN_NAME [NOT YET IMPLEMENTED]
  *
  */
 class DecodeTest extends AbstractUrlShortenerServiceTest

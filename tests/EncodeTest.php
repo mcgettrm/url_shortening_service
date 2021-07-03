@@ -9,8 +9,8 @@ use UrlShortener\DomainObjects\Models\ShortLink;
  * Should cover the following scenarios:
  * - Should return a string CONFIG_DOMAIN_NAME at the beginning to the caller. [DONE]
  * - Encoded URL should have only one / [DONE]
- * - Should be saved in persistence
- * - Does not save in persistence if the identifier already exists (identifier is unique)
+ * - Should be saved in persistence [DONE]
+ * - Does not save in persistence if the identifier already exists (identifier is unique) [DONE]
  */
 class EncodeTest extends AbstractUrlShortenerServiceTest
 {

@@ -9,6 +9,15 @@ that can then be decoded by the Decode method of this API.
 
 **Method**: `POST`
 
+**Parameters**: `urlToEncode` where the URL to decode is the IDENTIFIER.
+
+**Body Example**: 
+```
+{
+    urlToEncode:<URL_TO_ENCODE> 
+}
+```
+
 ### RESPONSE (SUCCESS):
 
 **Status Code**: 200 OK
@@ -39,9 +48,16 @@ Accepts a full URL or a 6 character identifier provided by the Encode function o
 
 **URL**: `/api/shortener/decode?urlToDecode=<URL_TO_DECODE>`
 
-**Method**: `GET`
+**Method**: `POST`
 
 **Parameters**: `urlToDecode` where the URL to decode is the IDENTIFIER.
+
+**Body Example**:
+```
+{
+    urlToEncode:<URL_TO_DECODE> 
+}
+```
 
 ### RESPONSE (SUCCESS):
 

@@ -1,5 +1,13 @@
 # URL Shortening Service
+Hello Ampersand, I've really enjoyed working on your test. However, I haven't finished it! 
 
+I've decided to submit what I have as I suspect I have spent more time now than you would have originally intended that I spend.
+So, it's worth noting that the repository is not implemented (which I think is okay because your brief steered me away from
+using any persistence data) and also I'd have liked to have implemented a validation class (but this really feels like a nice-to-have).
+
+I'm attaching the Lucid Chart pdf UML that I drew up so that you have an idea of what I was trying to achieve. 
+
+I hope you enjoy reviewing this as much as I enjoyed tinkering with it. 
 
 # Important links
 Git Repository: https://github.com/mcgettrm/url_shortening_service
