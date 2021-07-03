@@ -22,6 +22,17 @@ that can then be decoded by the Decode method of this API.
 } 
 ```
 
+### RESPONSE (FAILURE):
+
+**STATUS CODE**: 400 Bad Request
+
+**CONDITION**: Input Successfully Decoded
+
+**CONTENT**:
+``` 
+{} 
+```
+
 
 ## Decode
 Accepts a full URL or a 6 character identifier provided by the Encode function of the API and returns the original long URL used to generate it.
@@ -41,6 +52,28 @@ Accepts a full URL or a 6 character identifier provided by the Encode function o
 {
    longURL: <DECODED_URL>
 } 
+```
+
+### RESPONSE (FAILURE):
+
+**STATUS CODE**: 400 BAD REQUEST
+
+**CONDITION**: The inputted URL was not valid
+
+**CONTENT**:
+``` 
+{} 
+```
+
+### RESPONSE (FAILURE):
+
+**STATUS CODE**: 404 NOT FOUND
+
+**CONDITION**: The inputted URL could not be found.
+
+**CONTENT**:
+``` 
+{} 
 ```
 
 

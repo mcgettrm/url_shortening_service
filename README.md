@@ -18,7 +18,7 @@ Lucid Chart UML: https://lucid.app/lucidchart/invitations/accept/inv_64e3405f-7b
 - Should validate that IDENTIFIER is 6 characters (or return status code 400).
 - Should validate that IDENTIFIER is made of valid HTTP URL characters (or return status code 400).
 - Should accept the IDENTIFIER with or without the CONFIG_URL
-- Should return the original LONG_URL on success.
+- Should return the original LONG_URL on success (or return status code 404).
 
 # Installation Instructions
 1. Copy the source code from the git repository into the desired installation folder.
