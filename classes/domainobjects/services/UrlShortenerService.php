@@ -35,7 +35,6 @@ class UrlShortenerService
      * @return string
      */
     public function encode(string $urlToEncode):string{
-
         $encodedUrl = $this->config->getSiteBaseUrl() . '/' . $this->generateIdentifierFromString($urlToEncode);
         return $encodedUrl;
     }

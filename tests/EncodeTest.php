@@ -81,12 +81,9 @@ class EncodeTest extends TestCase
             foreach($this->testUrls as $urlToEncode){
                 $encodedUrl = $shorteningService->encode($urlToEncode);
 
-                //7th character from the end should be a '/'
-                $parts = explode('/',$encodedUrl);
+                $identifier = substr($encodedUrl, strrpos($encodedUrl, '/') + 1);
 
-                $this->assertTrue(isset($parts[1]));
-
-                $this->assertEquals($identifierLength,strlen($parts[1]));
+                $this->assertEquals($identifierLength,strlen($identifier));
             }
         }
 
