@@ -127,7 +127,7 @@ class EncodeTest extends TestCase
         $shortLink = $this->createMock(ShortLink::class);
         $shortLink->method('getLongUrl')->willReturn($this->genericTestUrl);
 
-        $shortLinkRepository->expects($this->any())->method('read')->will($this->onConsecutiveCalls($shortLink, false));
+        $shortLinkRepository->expects($this->any())->method('read')->willReturn($shortLink);
         $shortLinkRepository->expects($this->never())->method('create');
 
 
