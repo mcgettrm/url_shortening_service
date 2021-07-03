@@ -2,6 +2,7 @@
 namespace UrlShortener\DomainObjects\Services;
 
 use UrlShortener\Config;
+use UrlShortener\DomainObjects\Models\ShortLink;
 use UrlShortener\Repositories\ShortLinkRepository;
 
 class UrlShortenerService
@@ -52,18 +53,31 @@ class UrlShortenerService
         $shortLink = $this->shortLinkRepository->read($identifier);
 
         //Identifier doesn't exist yet, create it.
-        if(false === $shortLink){
+        if($shortLink === false){
+            //Identifier is unique, go ahead
             $this->shortLinkRepository->create($identifier,$urlToEncode,$encodedUrl);
             return $encodedUrl;
         } else {
-            //It already exists, but is the URL original URl the same?
-            if($shortLink->getLongUrl() == $urlToEncode){
-                //Duplicate submission, return the identifier
-                return $shortLink->getIdentifier();
-            } else {
-                //Different URL but the identifier has been accidentally duplicated, try again with a different offset
-                return $this->encode($urlToEncode, ++$offset);
-            }
+            return $this->handleDuplicateIdentifier($urlToEncode, $shortLink, $offset);
+        }
+    }
+
+    /**
+     * @param string $urlToEncode
+     * @param ShortLink $shortLink
+     * @param $offset
+     * @return string
+     */
+    private function handleDuplicateIdentifier(string $urlToEncode, ShortLink $shortLink, $offset){
+
+        //It already exists, but is the original URL the same?
+        if($shortLink->getLongUrl() === $urlToEncode && !$this->config->getAllowDuplicateLongUrls()){
+            return $shortLink->getIdentifier();
+
+
+        } else {
+            //Different URL but the identifier has been accidentally duplicated, try again with a different offset
+            return $this->encode($urlToEncode, ++$offset);
         }
     }
 

@@ -115,4 +115,21 @@ class EncodeTest extends TestCase
         $encodedUrl = $shorteningService->encode($this->genericTestUrl);
     }
 
+
+    public function testEncodeDoesNotCreateIfIdentifierAlreadyExistsAndDuplicatesNotAllowed(){
+        $config = $this->getConfig($this->genericBaseUrl);
+        $config->setAllowDuplicateLongURLs(false);
+        $shortLinkRepository = $this->createMock(\UrlShortener\Repositories\ShortLinkRepository::class);
+        $shortLinkRepository->method('read')->willReturn($this->createMock(ShortLink::class));
+        $shortLinkRepository->expects($this->never())->method('create');
+
+
+        //Read to return a shortlink but create not to be called at all
+        //If read returns an instance of ShortLink
+
+
+        $shorteningService = $this->getGenericUrlShorteningService($config, $shortLinkRepository);
+        $encodedUrl = $shorteningService->encode($this->genericTestUrl);
+    }
+
 }

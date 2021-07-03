@@ -65,3 +65,7 @@ PHP 7.4.x
 - Tag a release, change git remote to Ampersand repo and push
 
 - Update and Maintain classmap and readme throughout
+
+
+## Next steps
+- Switch to allow consumers to generate multiple short URLs for the same input URL. 
