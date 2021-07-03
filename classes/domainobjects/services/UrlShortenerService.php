@@ -25,6 +25,7 @@ class UrlShortenerService
      */
     private function generateIdentifierFromString(string $inputString, int $offset):string
     {
+
         $md5Encoded = md5($inputString);
         $base64Md5Encoded = base64_encode($md5Encoded);
 
@@ -50,35 +51,52 @@ class UrlShortenerService
         }
         $encodedUrl = $this->config->getSiteBaseUrl() . '/' . $identifier ;
 
-        $shortLink = $this->shortLinkRepository->read($identifier);
+        $shortLinkObj = $this->shortLinkRepository->read($identifier);
+
 
         //Identifier doesn't exist yet, create it.
-        if($shortLink === false){
+        if($shortLinkObj === false){
             //Identifier is unique, go ahead
             $this->shortLinkRepository->create($identifier,$urlToEncode,$encodedUrl);
             return $encodedUrl;
         } else {
-            return $this->handleDuplicateIdentifier($urlToEncode, $shortLink, $offset);
+            return $this->handleDuplicateIdentifier($urlToEncode, $shortLinkObj, $offset);
         }
     }
 
     /**
      * @param string $urlToEncode
      * @param ShortLink $shortLink
-     * @param $offset
+     * @param int $offset
+     * @param $identifier
+     * @param $encodedUrl
      * @return string
      */
-    private function handleDuplicateIdentifier(string $urlToEncode, ShortLink $shortLink, $offset){
+    private function handleDuplicateIdentifier(
+        string $urlToEncode,
+        ShortLink $shortLink,
+        int $offset
+    ){
 
-        //It already exists, but is the original URL the same?
-        if($shortLink->getLongUrl() === $urlToEncode && !$this->config->getAllowDuplicateLongUrls()){
-            return $shortLink->getIdentifier();
+        //We have a duplicate
+        $originalUrlIsSame = $shortLink->getLongUrl() === $urlToEncode;
 
+        if($originalUrlIsSame){
+            //We a true duplicate
+            if($this->config->getAllowDuplicateLongUrls()){
+
+                return $this->encode($urlToEncode, ++$offset);
+            } else {
+
+                return $shortLink->getShortUrl();
+            }
 
         } else {
-            //Different URL but the identifier has been accidentally duplicated, try again with a different offset
+            //Collision
+
             return $this->encode($urlToEncode, ++$offset);
         }
+
     }
 
     /**

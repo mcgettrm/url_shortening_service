@@ -50,7 +50,7 @@ class Config
         return $this->identifierLength;
     }
 
-    public function getAllowDuplicateLongUrls(){
-        return $this->getAllowDuplicateLongUrls();
+    public function getAllowDuplicateLongUrls():bool{
+        return $this->allowDuplicateLongUrls;
     }
 }
