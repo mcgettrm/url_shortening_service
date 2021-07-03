@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 use UrlShortener\Config;
+use UrlShortener\DomainObjects\Models\ShortLink;
 
 /**
  * Class EncodeTest
@@ -26,6 +27,7 @@ class EncodeTest extends TestCase
 
         if(!$shortLinkRepository){
             $shortLinkRepository = $this->createMock(\UrlShortener\Repositories\ShortLinkRepository::class);
+            $shortLinkRepository->method('read')->willReturn(false);
         }
 
         $shorteningService = new \UrlShortener\DomainObjects\Services\UrlShortenerService(
@@ -93,7 +95,9 @@ class EncodeTest extends TestCase
     public function testEncodeSavesTheGeneratedShortLink(){
         $config = $this->getConfig($this->genericBaseUrl);
         $shortLinkRepository = $this->createMock(\UrlShortener\Repositories\ShortLinkRepository::class);
+        $shortLinkRepository->method('read')->willReturn(false);
         $shortLinkRepository->expects($this->once())->method('create');
+
 
         $shorteningService = $this->getGenericUrlShorteningService($config, $shortLinkRepository);
         $encodedUrl = $shorteningService->encode($this->genericTestUrl);
@@ -102,10 +106,10 @@ class EncodeTest extends TestCase
     public function testRepositoryAskedIfARecordAlreadyExists(){
         $config = $this->getConfig($this->genericBaseUrl);
         $shortLinkRepository = $this->createMock(\UrlShortener\Repositories\ShortLinkRepository::class);
+        $shortLinkRepository->method('read')->willReturn(false);
 
         //If read returns an instance of ShortLink
         $shortLinkRepository->expects($this->once())->method('read');
-
 
         $shorteningService = $this->getGenericUrlShorteningService($config, $shortLinkRepository);
         $encodedUrl = $shorteningService->encode($this->genericTestUrl);
