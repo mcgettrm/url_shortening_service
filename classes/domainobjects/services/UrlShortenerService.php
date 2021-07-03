@@ -10,8 +10,8 @@ class UrlShortenerService
     private Config $config;
 
     public function __construct(
-        ShortLinkRepository $shortLinkRepository,
-        Config $config
+        Config $config,
+        ShortLinkRepository $shortLinkRepository
     ){
         $this->config = $config;
         $this->shortLinkRepository = $shortLinkRepository;
