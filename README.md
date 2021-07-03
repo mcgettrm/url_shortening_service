@@ -7,10 +7,10 @@ Lucid Chart UML: https://lucid.app/lucidchart/invitations/accept/inv_64e3405f-7b
 
 ## Constraints / Acceptance Criteria
 ### Encode
-- Should generate a 6-character IDENTIFIER from an input LONG_URL.
+- Should generate string with a CONFIG_IDENTIFIER_LENGTH IDENTIFIER at the end.
 - Should confirm that LONG_URL is a valid URL (or return status code 400).
 - Identifier should be unique.
-- Should return a string CONFIG_DOMAIN_NAME/IDENTIFIER to the caller.
+- Should return a string CONFIG_DOMAIN_NAME at the beginning to the caller.
 - IDENTIFIER should be a valid HTTP URL.
 
 ### Decode

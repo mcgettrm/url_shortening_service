@@ -6,10 +6,10 @@ use UrlShortener\Config;
  * Class EncodeTest
  *
  * Should cover the following scenarios:
- * - Should generate a 6-character IDENTIFIER from an input LONG_URL.
+ * - Should generate string with a CONFIG_IDENTIFIER_LENGTH IDENTIFIER at the end.
  * - Should confirm that LONG_URL is a valid URL (or return status code 400).
  * - Identifier should be unique.
- * - Should return a string CONFIG_DOMAIN_NAME/IDENTIFIER to the caller.
+ * - Should return a string CONFIG_DOMAIN_NAME at the beginning to the caller. [DONE]
  * - IDENTIFIER should be a valid HTTP URL.
  */
 class EncodeTest extends TestCase
