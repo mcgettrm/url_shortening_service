@@ -5,7 +5,7 @@
 Git Repository: https://github.com/mcgettrm/url_shortening_service
 Lucid Chart UML: https://lucid.app/lucidchart/invitations/accept/inv_64e3405f-7bcd-4445-b17b-a7b491e9b343?viewport_loc=-11%2C-11%2C2219%2C1065%2C0_0
 
-## Constraints
+## Constraints / Acceptance Criteria
 ### Encode
 - Should generate a 6-character IDENTIFIER from an input LONG_URL.
 - Should confirm that LONG_URL is a valid URL (or return status code 400).
@@ -44,4 +44,24 @@ PHP 7.4.x
 
 # Technical Notes
 - Runs using slim framework.
-- Developed using Apache.
+- Developed using Apache / WAMP on Windows 10 System.
+
+## Development Approach
+- Read some framework docs
+- Research problem domain (google google google to get an idea of Acceptance Criteria)
+- Define classmap in LucidChart
+- Get some basic JSON endpoints up and running
+- Configure composer autoloader
+- Implement LucidChart classmap in framework
+- Document API endpoints and expected results
+- Define constraints / Acceptance Criteria 
+- Get PHPUnit up and running
+- TDD Domain / Business layer throughout implementation of business logic according to Acceptance Criteria
+- Run final tests using Postman
+- Skip code review and QA (wouldn't be much of a test otherwise!)
+- Search for any "TODO::" in code
+- Place final copy of classmap in "misc" folder as documentation
+- Review and update documentation
+- Tag a release, change git remote to Ampersand repo and push
+
+- Update and Maintain classmap and readme throughout
