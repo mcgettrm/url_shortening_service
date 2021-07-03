@@ -35,7 +35,11 @@ class UrlShortenerService
      * @return string
      */
     public function encode(string $urlToEncode):string{
-        $encodedUrl = $this->config->getSiteBaseUrl() . '/' . $this->generateIdentifierFromString($urlToEncode);
+
+        $identifier = $this->generateIdentifierFromString($urlToEncode);
+        $encodedUrl = $this->config->getSiteBaseUrl() . '/' . $identifier ;
+
+        $this->shortLinkRepository->create($identifier,$urlToEncode,$encodedUrl);
         return $encodedUrl;
     }
 
