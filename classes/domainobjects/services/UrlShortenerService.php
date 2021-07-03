@@ -1,16 +1,19 @@
 <?php
 namespace UrlShortener\DomainObjects\Services;
 
+use UrlShortener\Config;
 use UrlShortener\Repositories\ShortLinkRepository;
 
 class UrlShortenerService
 {
-
     private ShortLinkRepository $shortLinkRepository;
+    private Config $config;
 
     public function __construct(
-        ShortLinkRepository $shortLinkRepository
+        ShortLinkRepository $shortLinkRepository,
+        Config $config
     ){
+        $this->config = $config;
         $this->shortLinkRepository = $shortLinkRepository;
     }
 

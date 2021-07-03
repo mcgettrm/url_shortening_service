@@ -1,11 +1,16 @@
 <?php
 namespace UrlShortener\Repositories;
 
+use UrlShortener\Config;
+use UrlShortener\DomainObjects\Models\ShortLink;
+
 class ShortLinkRepository
 {
     private array $shortLinksArray;
+    private Config $config;
 
-    public function __construct(){
+    public function __construct(Config $config){
+        $this->config = $config;
         $this->loadAll();
     }
 
@@ -17,7 +22,7 @@ class ShortLinkRepository
     }
 
     /**
-     * Saves data array to persistant storage
+     * Saves data array to persistent storage
      */
     private function persist(){
         $this->shortLinksArray;

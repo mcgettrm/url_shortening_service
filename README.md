@@ -10,7 +10,7 @@ Lucid Chart UML: https://lucid.app/lucidchart/invitations/accept/inv_64e3405f-7b
 - Should generate a 6-character IDENTIFIER from an input LONG_URL.
 - Should confirm that LONG_URL is a valid URL (or return status code 400).
 - Identifier should be unique.
-- Should return a string <CONFIG_DOMAIN_NAME>/<IDENTIFIER> to the caller.
+- Should return a string CONFIG_DOMAIN_NAME/IDENTIFIER to the caller.
 - IDENTIFIER should be a valid HTTP URL.
 
 ### Decode
@@ -35,6 +35,8 @@ Lucid Chart UML: https://lucid.app/lucidchart/invitations/accept/inv_64e3405f-7b
    ```
    <YOUR BASE PATH>/public/
    ``` 
+   
+4. Navigate to classes/config.php and edit the private variable `$base_url` to suit your needs.
 
 # Dependencies
 The host system will need composer installed in order to facilitation installation of the software.
