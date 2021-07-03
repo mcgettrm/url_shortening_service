@@ -1,5 +1,6 @@
 <?php declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
+use UrlShortener\Config;
 
 /**
  * Class EncodeTest
@@ -13,9 +14,24 @@ use PHPUnit\Framework\TestCase;
  */
 class EncodeTest extends TestCase
 {
-    public function testTest(): void
+    private $genericUrlToEncode ="www.mcgettrixelectrix.co.uk/my_ad_campaign";
+    public function testEncodeReturnsDomainName(): void
     {
-        $this->assertEquals(1,1);
+        $baseServerUrl = "my_base_url.co.uk";
+
+        $config = new Config();
+        $config->setBaseUrl($baseServerUrl);
+        $shortLinkRepository = $this->createMock(\UrlShortener\Repositories\ShortLinkRepository::class);
+
+        $shorteningService = new \UrlShortener\DomainObjects\Services\UrlShortenerService(
+            $config,
+            $shortLinkRepository
+        );
+
+        $encodedUrl = $shorteningService->encode($this->genericUrlToEncode);
+        $baseUrlLength = strlen($baseServerUrl);
+
+        $this->assertEquals($baseServerUrl,substr($encodedUrl,0,$baseUrlLength));
     }
 
 }
