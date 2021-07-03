@@ -58,7 +58,7 @@ class EncodeTest extends TestCase
         }
     }
 
-    public function testEncodedStringHasForwardSlashAndOnlyOne(){
+    public function testEncodedStringHasOneForwardSlash(){
         $config = $this->getConfig($this->genericBaseUrl);
         $shorteningService = $this->getGenericUrlShorteningService($config);
 
