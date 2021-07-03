@@ -23,14 +23,13 @@ class DecodeTest extends AbstractUrlShortenerServiceTest
         $shortUrl = "http://url_shortening_service/YTlkMT";
         $identifier = "YTlkMT";
 
-        $config = $this->getConfig();
         $shortLinkRepository = $this->createMock(\UrlShortener\Repositories\ShortLinkRepository::class);
         $shortLink = new ShortLink();
         $shortLink->setLongUrl($longUrl);
         $shortLink->setIdentifier($identifier);
         $shortLink->setShortUrl($shortUrl);
         $shortLinkRepository->method('read')->willReturn($shortLink);
-        $shortenerService = $this->getGenericUrlShorteningService($config, $shortLinkRepository);
+        $shortenerService = $this->getGenericUrlShorteningService(null, $shortLinkRepository);
 
         $this->assertEquals($longUrl,$shortenerService->decode($this->genericDecodeString));
     }
@@ -40,16 +39,33 @@ class DecodeTest extends AbstractUrlShortenerServiceTest
         $shortUrl = "http://url_shortening_service/YTlkMT";
         $identifier = "YTlkMT";
 
-        $config = $this->getConfig();
         $shortLinkRepository = $this->createMock(\UrlShortener\Repositories\ShortLinkRepository::class);
         $shortLink = new ShortLink();
         $shortLink->setLongUrl($longUrl);
         $shortLink->setIdentifier($identifier);
         $shortLink->setShortUrl($shortUrl);
         $shortLinkRepository->method('read')->willReturn($shortLink);
-        $shortenerService = $this->getGenericUrlShorteningService($config, $shortLinkRepository);
+        $shortenerService = $this->getGenericUrlShorteningService(null, $shortLinkRepository);
 
         $this->assertEquals($longUrl,$shortenerService->decode($identifier));
+    }
+
+    public function testEncodedURLDecodesCorrectly(){
+        $shortLink = new ShortLink();
+        $shortLink->setLongUrl($this->genericTestLongUrl);
+        $shortLink->setIdentifier('NmI2MW');
+        $shortLink->setShortUrl('http://url_shortening_service/NmI2MW');
+        $shortLinkRepository = $this->createMock(\UrlShortener\Repositories\ShortLinkRepository::class);
+
+        //First call will return false, triggering the create, second call will be the decode method
+        $shortLinkRepository->expects($this->any())->method('read')->will($this->onConsecutiveCalls(false, $shortLink));
+        $shortLinkRepository->expects($this->once())->method('create');
+
+        $shortLinkRepository->method('read')->willReturn($shortLink);
+        $urlShortenerService = $this->getGenericUrlShorteningService(null, $shortLinkRepository);
+        $encodedUrl = $urlShortenerService->encode($this->genericTestLongUrl);
+
+        $this->assertEquals($this->genericTestLongUrl, $urlShortenerService->decode($encodedUrl));
     }
 
 

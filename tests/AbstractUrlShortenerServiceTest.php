@@ -4,8 +4,10 @@ use PHPUnit\Framework\TestCase;
 use UrlShortener\Config;
 use UrlShortener\DomainObjects\Services\UrlShortenerService;
 
-class AbstractUrlShortenerServiceTest extends TestCase
+abstract class AbstractUrlShortenerServiceTest extends TestCase
 {
+
+    protected $genericTestLongUrl = "www.mcgettrixelectrix.co.uk/my_ad_campaign/massive_summer_sale";
     /**
      * @param Config $config
      * @param null $shortLinkRepository

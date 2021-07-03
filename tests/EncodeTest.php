@@ -14,9 +14,7 @@ use UrlShortener\DomainObjects\Models\ShortLink;
  */
 class EncodeTest extends AbstractUrlShortenerServiceTest
 {
-    private $genericBaseUrl = "my_base_url.co.uk";
-
-    private $genericTestUrl = "www.mcgettrixelectrix.co.uk/my_ad_campaign";
+    protected $genericBaseUrl = "my_base_url.co.uk";
 
     //Using an array here so that we can easily add new example urls
     private $testUrls = [
@@ -80,7 +78,7 @@ class EncodeTest extends AbstractUrlShortenerServiceTest
 
 
         $shorteningService = $this->getGenericUrlShorteningService($config, $shortLinkRepository);
-        $encodedUrl = $shorteningService->encode($this->genericTestUrl);
+        $encodedUrl = $shorteningService->encode($this->genericTestLongUrl);
     }
 
     public function testRepositoryAskedIfARecordAlreadyExists(){
@@ -92,7 +90,7 @@ class EncodeTest extends AbstractUrlShortenerServiceTest
         $shortLinkRepository->expects($this->once())->method('read');
 
         $shorteningService = $this->getGenericUrlShorteningService($config, $shortLinkRepository);
-        $encodedUrl = $shorteningService->encode($this->genericTestUrl);
+        $encodedUrl = $shorteningService->encode($this->genericTestLongUrl);
     }
 
 
@@ -105,13 +103,13 @@ class EncodeTest extends AbstractUrlShortenerServiceTest
         $config->setAllowDuplicateLongURLs(false);
         $shortLinkRepository = $this->createMock(\UrlShortener\Repositories\ShortLinkRepository::class);
         $shortLink = $this->createMock(ShortLink::class);
-        $shortLink->method('getLongUrl')->willReturn($this->genericTestUrl);
+        $shortLink->method('getLongUrl')->willReturn($this->genericTestLongUrl);
 
         $shortLinkRepository->expects($this->any())->method('read')->willReturn($shortLink);
         $shortLinkRepository->expects($this->never())->method('create');
 
         $shorteningService = $this->getGenericUrlShorteningService($config, $shortLinkRepository);
-        $encodedUrl = $shorteningService->encode($this->genericTestUrl);
+        $encodedUrl = $shorteningService->encode($this->genericTestLongUrl);
     }
 
     /**
@@ -122,13 +120,13 @@ class EncodeTest extends AbstractUrlShortenerServiceTest
         $config->setAllowDuplicateLongURLs(true);
         $shortLinkRepository = $this->createMock(\UrlShortener\Repositories\ShortLinkRepository::class);
         $shortLink = $this->createMock(ShortLink::class);
-        $shortLink->method('getLongUrl')->willReturn($this->genericTestUrl);
+        $shortLink->method('getLongUrl')->willReturn($this->genericTestLongUrl);
 
         $shortLinkRepository->expects($this->any())->method('read')->will($this->onConsecutiveCalls($shortLink, false));
         $shortLinkRepository->expects($this->once())->method('create');
 
         $shorteningService = $this->getGenericUrlShorteningService($config, $shortLinkRepository);
-        $encodedUrl = $shorteningService->encode($this->genericTestUrl);
+        $encodedUrl = $shorteningService->encode($this->genericTestLongUrl);
     }
 
     public function testEncodedUrlIsUrlSafe(){
@@ -136,7 +134,7 @@ class EncodeTest extends AbstractUrlShortenerServiceTest
         $shortLinkRepository = $this->createMock(\UrlShortener\Repositories\ShortLinkRepository::class);
         $shortLinkRepository->method('read')->willReturn(false);
         $shorteningService = $this->getGenericUrlShorteningService($config, $shortLinkRepository);
-        $encodedUrl = $shorteningService->encode($this->genericTestUrl);
+        $encodedUrl = $shorteningService->encode($this->genericTestLongUrl);
 
         $identifier = $this->getIdentifierFromEncodedUrl($encodedUrl);
 
