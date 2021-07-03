@@ -26,8 +26,9 @@ class UrlShortenerController
     public function encode(string $urlToEncode, Response $response):Response{
 
         if($this->urlValidator->isValidLongUrl($urlToEncode)){
+            $encodedUrl = $this->urlShortenerService->encode($urlToEncode);
             $data = array(
-                'shortenedUrl' => $this->urlShortenerService->encode($urlToEncode)
+                'shortenedUrl' => $encodedUrl
             );
 
             $statusCode = 201;

@@ -19,12 +19,17 @@ class UrlShortenerService
 
     /**
      * @param string $inputString
-     * @return string|bool
+     * @param int $offset
+     * @return string
      */
-    private function generateIdentifierFromString(string $inputString):string
+    private function generateIdentifierFromString(string $inputString, int $offset):string
     {
         $base64Encoded = base64_encode($inputString);
-        $identifier = substr($base64Encoded, 0,$this->config->getIdentifierLength());
+
+        if(($offset + $this->config->getIdentifierLength()) > strlen($base64Encoded)){
+            return false;
+        }
+        $identifier = substr($base64Encoded, $offset,$this->config->getIdentifierLength());
         return $identifier;
     }
 
@@ -32,17 +37,33 @@ class UrlShortenerService
      * Takes an unencoded, long URL and returns an encoded, short URL that is compatible with the decode method
      * of this class.
      * @param string $urlToEncode
+     * @param int $offset
      * @return string
      */
-    public function encode(string $urlToEncode):string{
+    public function encode(string $urlToEncode, int $offset = 0):string{
 
-        $identifier = $this->generateIdentifierFromString($urlToEncode);
+        $identifier = $this->generateIdentifierFromString($urlToEncode, $offset);
+        if($identifier === false){
+            return false;
+        }
         $encodedUrl = $this->config->getSiteBaseUrl() . '/' . $identifier ;
 
         $shortLink = $this->shortLinkRepository->read($identifier);
 
-        $this->shortLinkRepository->create($identifier,$urlToEncode,$encodedUrl);
-        return $encodedUrl;
+        //Identifier doesn't exist yet, create it.
+        if(false === $shortLink){
+            $this->shortLinkRepository->create($identifier,$urlToEncode,$encodedUrl);
+            return $encodedUrl;
+        } else {
+            //It already exists, but is the URL original URl the same?
+            if($shortLink->getLongUrl() == $urlToEncode){
+                //Duplicate submission, return the identifier
+                return $shortLink->getIdentifier();
+            } else {
+                //Different URL but the identifier has been accidentally duplicated, try again with a different offset
+                return $this->encode($urlToEncode, ++$offset);
+            }
+        }
     }
 
     /**

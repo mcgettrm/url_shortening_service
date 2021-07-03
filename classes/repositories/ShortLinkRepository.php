@@ -33,7 +33,12 @@ class ShortLinkRepository
         $this->persist();
     }
 
-    public function read(string $identifier): ShortLink{
+    /**
+     * If found, return instance of domain object, if not return false
+     * @param string $identifier
+     * @return ShortLink|bool
+     */
+    public function read(string $identifier){
         $shortLink = new ShortLink();
         return $shortLink;
     }
