@@ -7,15 +7,15 @@ that can then be decoded by the Decode method of this API.
 
 **URL**: `/api/encode`
 
-**METHOD**: `POST`
+**Method**: `POST`
 
 ### RESPONSE (SUCCESS):
 
-**STATUS CODE**: 200 OK
+**Status Code**: 200 OK
 
-**CONDITION**: Input Successfully Encoded
+**Condition**: Input Successfully Encoded.
 
-**CONTENT**:
+**Content**:
 ``` 
 {
    shortUrl: <ENCODED_URL>
@@ -24,11 +24,11 @@ that can then be decoded by the Decode method of this API.
 
 ### RESPONSE (FAILURE):
 
-**STATUS CODE**: 400 Bad Request
+**Status Code**: 400 Bad Request
 
-**CONDITION**: Input Successfully Decoded
+**Condition**: Input Successfully Decoded.
 
-**CONTENT**:
+**Content**:
 ``` 
 {} 
 ```
@@ -39,15 +39,15 @@ Accepts a full URL or a 6 character identifier provided by the Encode function o
 
 **URL**: `/api/decode`
 
-**METHOD**: `GET`
+**Method**: `GET`
 
 ### RESPONSE (SUCCESS):
 
-**STATUS CODE**: 200 OK
+**Status Code**: 200 OK
 
-**CONDITION**: Input Successfully Decoded
+**Condition**: Input Successfully Decoded.
 
-**CONTENT**:
+**Content**:
 ``` 
 {
    longURL: <DECODED_URL>
@@ -56,22 +56,22 @@ Accepts a full URL or a 6 character identifier provided by the Encode function o
 
 ### RESPONSE (FAILURE):
 
-**STATUS CODE**: 400 BAD REQUEST
+**Status Code**: 400 BAD REQUEST
 
-**CONDITION**: The inputted URL was not valid
+**Condition**: The inputted URL was not valid.
 
-**CONTENT**:
+**Content**:
 ``` 
 {} 
 ```
 
 ### RESPONSE (FAILURE):
 
-**STATUS CODE**: 404 NOT FOUND
+**Status Code**: 404 NOT FOUND
 
-**CONDITION**: The inputted URL could not be found.
+**Condition**: The inputted URL could not be found.
 
-**CONTENT**:
+**Content**:
 ``` 
 {} 
 ```
