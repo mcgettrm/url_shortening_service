@@ -24,8 +24,7 @@ class UrlShortenerService
      * @return string
      */
     public function encode(string $urlToEncode):string{
-        $encodedUrl = "test";
-        return $encodedUrl;
+        return $this->config->getSiteBaseUrl();
     }
 
     /**
