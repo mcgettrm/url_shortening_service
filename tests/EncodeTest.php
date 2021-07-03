@@ -116,23 +116,27 @@ class EncodeTest extends TestCase
     }
 
 
-//    public function testEncodeDoesNotCreateIfIdentifierAlreadyExistsAndDuplicatesAllowed(){
-//        $config = $this->getConfig($this->genericBaseUrl);
-//        $config->setAllowDuplicateLongURLs(true);
-//        $shortLinkRepository = $this->createMock(\UrlShortener\Repositories\ShortLinkRepository::class);
-//        $shortLink = $this->createMock(ShortLink::class);
-//        $shortLink->method('getLongUrl')->willReturn($this->genericTestUrl);
-//
-//        $shortLinkRepository->expects($this->any())->method('read')->will($this->onConsecutiveCalls($shortLink, false));
-//        $shortLinkRepository->expects($this->never())->method('create');
-//
-//
-//        //Read to return a shortlink but create not to be called at all
-//        //If read returns an instance of ShortLink
-//
-//
-//        $shorteningService = $this->getGenericUrlShorteningService($config, $shortLinkRepository);
-//        $encodedUrl = $shorteningService->encode($this->genericTestUrl);
-//    }
+    /**
+     * When duplicate long URLS are allowed, we should create a new identifier and return new shortlink.
+     * When duplicte long URLS are not allowed, we should return the old shortlink.
+     */
+    public function testEncodeDoesNotCreateIfIdentifierAlreadyExistsAndDuplicateLongUrlsNotAllowed(){
+        $config = $this->getConfig($this->genericBaseUrl);
+        $config->setAllowDuplicateLongURLs(false);
+        $shortLinkRepository = $this->createMock(\UrlShortener\Repositories\ShortLinkRepository::class);
+        $shortLink = $this->createMock(ShortLink::class);
+        $shortLink->method('getLongUrl')->willReturn($this->genericTestUrl);
+
+        $shortLinkRepository->expects($this->any())->method('read')->will($this->onConsecutiveCalls($shortLink, false));
+        $shortLinkRepository->expects($this->never())->method('create');
+
+
+        //Read to return a shortlink but create not to be called at all
+        //If read returns an instance of ShortLink
+
+
+        $shorteningService = $this->getGenericUrlShorteningService($config, $shortLinkRepository);
+        $encodedUrl = $shorteningService->encode($this->genericTestUrl);
+    }
 
 }
