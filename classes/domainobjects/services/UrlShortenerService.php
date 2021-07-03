@@ -24,12 +24,13 @@ class UrlShortenerService
      */
     private function generateIdentifierFromString(string $inputString, int $offset):string
     {
-        $base64Encoded = base64_encode($inputString);
+        $md5Encoded = md5($inputString);
+        $base64Md5Encoded = base64_encode($md5Encoded);
 
-        if(($offset + $this->config->getIdentifierLength()) > strlen($base64Encoded)){
+        if(($offset + $this->config->getIdentifierLength()) > strlen($base64Md5Encoded)){
             return false;
         }
-        $identifier = substr($base64Encoded, $offset,$this->config->getIdentifierLength());
+        $identifier = substr($base64Md5Encoded, $offset,$this->config->getIdentifierLength());
         return $identifier;
     }
 
