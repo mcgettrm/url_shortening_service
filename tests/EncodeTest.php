@@ -23,6 +23,11 @@ class EncodeTest extends TestCase
         'www.mcgettrixelectrix.co.uk/my_ad_campaign'
     ];
 
+    private function getIdentifierFromEncodedUrl($encodedUrl){
+        $identifier = substr($encodedUrl, strrpos($encodedUrl, '/') + 1);
+        return $identifier;
+    }
+
     private function getGenericUrlShorteningService(Config $config, $shortLinkRepository = null){
 
         if(!$shortLinkRepository){
@@ -83,8 +88,8 @@ class EncodeTest extends TestCase
 
             foreach($this->testUrls as $urlToEncode){
                 $encodedUrl = $shorteningService->encode($urlToEncode);
+                $identifier = $this->getIdentifierFromEncodedUrl($encodedUrl);
 
-                $identifier = substr($encodedUrl, strrpos($encodedUrl, '/') + 1);
 
                 $this->assertEquals($identifierLength,strlen($identifier));
             }
@@ -149,6 +154,20 @@ class EncodeTest extends TestCase
 
         $shorteningService = $this->getGenericUrlShorteningService($config, $shortLinkRepository);
         $encodedUrl = $shorteningService->encode($this->genericTestUrl);
+    }
+
+    public function testEncodedUrlIsUrlSafe(){
+        $config = $this->getConfig($this->genericBaseUrl);
+        $shortLinkRepository = $this->createMock(\UrlShortener\Repositories\ShortLinkRepository::class);
+        $shortLinkRepository->method('read')->willReturn(false);
+        $shorteningService = $this->getGenericUrlShorteningService($config, $shortLinkRepository);
+        $encodedUrl = $shorteningService->encode($this->genericTestUrl);
+
+        $identifier = $this->getIdentifierFromEncodedUrl($encodedUrl);
+
+        //Should only contain numbers and letters
+        $this->assertEquals(0, preg_match('/[^A-Za-z0-9]/', $identifier));
+
     }
 
 }
