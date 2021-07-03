@@ -39,7 +39,6 @@ class UrlShortenerService
         $base64Md5Encoded = base64_encode($md5Encoded);
         $urlSafe = str_replace(['/','+','='],'',$base64Md5Encoded);
 
-        //TODO::Ways to reduce collision chance
         //Outside chance that we have had so many collisions that we run out of string. Time to admit there's an error.
         if(($offset + $this->config->getIdentifierLength()) > strlen($urlSafe)){
             return false;
@@ -105,7 +104,6 @@ class UrlShortenerService
 
         } else {
             //Collision
-
             return $this->encode($urlToEncode, ++$offset);
         }
 
