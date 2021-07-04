@@ -9,20 +9,34 @@ I'm attaching the Lucid Chart pdf UML that I drew up so that you have an idea of
 
 I hope you enjoy reviewing this as much as I enjoyed tinkering with it. 
 
+# Terminology
+Throughout the code comments and the documentation, several phrases are used repeatedly. For clarity, the meaning of those phrases is covered here:
+
+**LONG URL:** This is the unencoded URL that the consumer would hope to have shortened.
+
+**SHORT URL:** This is the resulting shortened URL after the encoding operation has taken place. It is made of the configuration
+BASE URL and the IDENTIFIER.
+
+**IDENTIFIER:** This is the part of the resulting SHORT URL that is used to identify the original LONG URL that generated it. 
+
+
 # DOCUMENTATION
-Please find supporting documentation in the `misc` folder for your perusal. 
-### API_DOCUMENTATION.md
+Please find supporting documentation in the `misc` folder for your perusal.
+### API_DOCUMENTATION.md (For Service Consumers)
 Contains information relevant for consumers of the API.
-### REQUIREMENTS.md
+### REQUIREMENTS.md (For Maintenance and QA)
 The original brief for this task
-### URL Shortening UML.pdf
-This contains the original application plan. It was modified throughout development. 
+### URL Shortening Classmap UML.pdf (For Maintenance)
+This contains the original application plan. It was modified and updated throughout development. It includes classes and methods that haven't been implemented yet. 
 
 # Important links
-Git Repository: https://github.com/mcgettrm/url_shortening_service
-Lucid Chart UML: https://lucid.app/lucidchart/invitations/accept/inv_64e3405f-7bcd-4445-b17b-a7b491e9b343?viewport_loc=-11%2C-11%2C2219%2C1065%2C0_0
+Git Repository (currently private): https://github.com/mcgettrm/url_shortening_service
+
+Lucid Chart Classmap UML (currently private): https://lucid.app/lucidchart/invitations/accept/inv_64e3405f-7bcd-4445-b17b-a7b491e9b343?viewport_loc=-11%2C-11%2C2219%2C1065%2C0_0
 
 ## Constraints / Acceptance Criteria
+The acceptance criteria below have been inferred from the project breif rather than being discussed or set and are therefor subject to change.
+
 ### Encode
 - Should generate string with a CONFIG_IDENTIFIER_LENGTH IDENTIFIER at the end.
 - Should confirm that LONG_URL is a valid URL (or return status code 400).
@@ -54,14 +68,23 @@ Lucid Chart UML: https://lucid.app/lucidchart/invitations/accept/inv_64e3405f-7b
    ``` 
    
 4. Navigate to classes/config.php and edit the private variable `$base_url` to suit your needs.
+5. There are two optional values that can be set in the config. `$identifierLength` determines how long the PATH of the SHORT URL
+will be. `$allowDuplicateLongUrls` determines whether the resubmission of a LONG URL should return the same SHORT URL as previously or generate a new one.
 
 # Dependencies
 The host system will need composer installed in order to facilitation installation of the software.
 PHP 7.4.x
 
 # Technical Notes
-- Runs using slim framework.
+Technologies and Tooling:
 - Developed using Apache / WAMP on Windows 10 System.
+- Git/Github version control.
+- Git bash.
+- PHP Storm.
+- Postman.
+- XDebug.
+- PHPUnit.
+
 
 ## Development Approach
 - Read some framework docs
@@ -80,9 +103,13 @@ PHP 7.4.x
 - Place final copy of classmap in "misc" folder as documentation
 - Review and update documentation
 - Tag a release, change git remote to Ampersand repo and push
-
 - Update and Maintain classmap and readme throughout
 
 
-## Next steps
-- Switch to allow consumers to generate multiple short URLs for the same input URL. 
+## Other Considerations
+- More collisions are imminent as the service grows more popular. The UrlShortenerService class will need to be updated to
+ensure that duplicate identifiers are not generated too often in the future. 
+- Short URLs should expire using a TTL and a server cron job/scheduled task. This would assist in the consideration above.
+- Potential for user authentication. 
+- Improvements to prevent overuse of the URL (e.g. limiting calls from certain IPs).
+- Implementation of a redirect service for short URLs.
