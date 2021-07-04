@@ -38,7 +38,14 @@ class UrlShortenerService
      * @return false|string
      */
     private function getIdentifierFromEncodedUrl($encodedUrl){
-        $identifier = substr($encodedUrl, strrpos($encodedUrl, '/') + 1);
+        $slashPosition = strrpos($encodedUrl, '/');
+        if($slashPosition !== false){
+            $offSet = $slashPosition +1;
+        } else {
+            $offSet = 0;
+        }
+
+        $identifier = substr($encodedUrl,  $offSet);
         return $identifier;
     }
 

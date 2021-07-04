@@ -52,13 +52,29 @@ Accepts a full URL or a 6 character identifier provided by the Encode function o
 
 **Parameters**: `urlToDecode` where the URL to decode is the IDENTIFIER.
 
-**Request Body Example**:
+**Request Headers Example**:
+```
+Content-Type: application/json
+User-Agent: PostmanRuntime/7.26.8
+Accept: */*
+Postman-Token: 035f29bc-32ca-4d6e-872b-ed4a3c65fb82
+Host: url_shortening_service
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Content-Length: 62
+```
+
+**Request Body Examples**:
 ```
 {
     "urlToDecode":"YTlkMT"
 }
 ```
-
+```
+{
+    "urlToDecode":"http://url_shortening_service/YTlkMT"
+}
+```
 ### RESPONSE (SUCCESS):
 
 **Status Code**: 200 OK
