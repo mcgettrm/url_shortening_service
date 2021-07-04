@@ -113,4 +113,5 @@ ensure that duplicate identifiers are not generated too often in the future.
 - Improvements to prevent overuse of the URL (e.g. limiting calls from certain IPs).
 - Implementation of a redirect service for short URLs.
 - Allow users to submit a custom short URL.
+- Controller should return 201 when a new record is created and 200 or 409 when a duplicate is encountered and returned instead.
 

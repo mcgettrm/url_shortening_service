@@ -45,7 +45,7 @@ class UrlShortenerController
                 'shortenedUrl' => $encodedUrl
             );
 
-            $statusCode = 201;
+            $statusCode = 200;
         } else {
             $data = [];
             $statusCode = 400;

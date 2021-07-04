@@ -9,12 +9,22 @@ Accepts a URL in its request body, encodes it and returns a shortened URL consis
 
 **Method**: `POST`
 
+**Content Type**: `application\json`
+
 **Parameters**: `urlToEncode` where the URL to decode is the IDENTIFIER.
+
+**Request Headers Example**:
+```
+Content-Type: application/json
+Accept: */*
+Host: url_shortening_service
+Content-Length: 233
+```
 
 **Request Body Example**: 
 ```
 {
-    urlToEncode:<URL_TO_ENCODE> 
+    "urlToEncode":"www.snuggle.com/marketing/my_amazing_campagin/extreme_pillows_deal"
 }
 ```
 
@@ -50,17 +60,15 @@ Accepts a full URL or a 6 character identifier provided by the Encode function o
 
 **Method**: `POST`
 
+**Content Type**: `application\json`
+
 **Parameters**: `urlToDecode` where the URL to decode is the IDENTIFIER.
 
 **Request Headers Example**:
 ```
 Content-Type: application/json
-User-Agent: PostmanRuntime/7.26.8
 Accept: */*
-Postman-Token: 035f29bc-32ca-4d6e-872b-ed4a3c65fb82
 Host: url_shortening_service
-Accept-Encoding: gzip, deflate, br
-Connection: keep-alive
 Content-Length: 62
 ```
 

@@ -90,6 +90,7 @@ class UrlShortenerService
         if($shortLinkObj === false){
             //Identifier is unique, go ahead
             $this->shortLinkRepository->create($identifier,$urlToEncode,$encodedUrl);
+
             return $encodedUrl;
         } else {
             return $this->handleDuplicateIdentifier($urlToEncode, $shortLinkObj, $offset);
