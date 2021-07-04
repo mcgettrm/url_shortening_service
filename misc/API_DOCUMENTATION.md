@@ -11,7 +11,7 @@ Accepts a URL in its request body, encodes it and returns a shortened URL consis
 
 **Content Type**: `application\json`
 
-**Parameters**: `urlToEncode` where the URL to decode is the IDENTIFIER.
+**Parameters**: `urlToEncode` where the URL to encode is the URL to be shortened.
 
 **Request Headers Example**:
 ```
@@ -54,7 +54,7 @@ Content-Length: 233
 
 
 ## Decode
-Accepts a full URL or a 6 character identifier provided by the Encode function of the API and returns the original long URL used to generate it.
+Accepts a full URL or a 6 character (by default) identifier provided by the Encode function of the API and returns the original long URL used to generate it.
 
 **URL**: `/api/shortener/decode`
 
@@ -62,7 +62,7 @@ Accepts a full URL or a 6 character identifier provided by the Encode function o
 
 **Content Type**: `application\json`
 
-**Parameters**: `urlToDecode` where the URL to decode is the IDENTIFIER.
+**Parameters**: `urlToDecode` where the URL to decode is the IDENTIFIER or the LONG URL.
 
 **Request Headers Example**:
 ```
@@ -92,8 +92,8 @@ Content-Length: 62
 **Content**:
 ``` 
 {
-   decodedURL: <DECODED_URL>
-} 
+    "decodedUrL":"www.snuggle.com\/marketing\/my_amazing_campagin\/extreme_pillows_deal"
+}
 ```
 
 ### RESPONSE (FAILURE):
