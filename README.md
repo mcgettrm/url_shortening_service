@@ -39,7 +39,7 @@ Git Repository (currently private): https://github.com/mcgettrm/url_shortening_s
 Lucid Chart Classmap UML (currently private): https://lucid.app/lucidchart/invitations/accept/inv_64e3405f-7bcd-4445-b17b-a7b491e9b343?viewport_loc=-11%2C-11%2C2219%2C1065%2C0_0
 
 ## Constraints / Acceptance Criteria
-The acceptance criteria below have been inferred from the project breif rather than being discussed or set and are therefor subject to change.
+The acceptance criteria below have been inferred from the project brief rather than being discussed or set and are therefore subject to change.
 
 ### Encode
 - Should generate string with a CONFIG_IDENTIFIER_LENGTH IDENTIFIER at the end.
@@ -50,13 +50,8 @@ The acceptance criteria below have been inferred from the project breif rather t
 
 ### Decode
 - Should accept an IDENTIFIER.
-- Should validate that IDENTIFIER is 6 characters (or return status code 400).
-- Should validate that IDENTIFIER is made of valid HTTP URL characters (or return status code 400).
-- Should accept the IDENTIFIER with or without the CONFIG_URL
+- Should accept the IDENTIFIER with or without the CONFIG_URL.
 - Should return the original LONG_URL on success (or return status code 404).
-- Should only accept SHORT_URL from the CONFIG_DOMAIN_NAME
-- If a short URL is passed that has an incorrect CONFIG_DOMAIN_NAME, fail and return status code 400 
-
 - A URL encoded by the Encode endpoint should be a valid input for the Decode method.
 
 # Installation Instructions
@@ -117,4 +112,5 @@ ensure that duplicate identifiers are not generated too often in the future.
 - Potential for user authentication. 
 - Improvements to prevent overuse of the URL (e.g. limiting calls from certain IPs).
 - Implementation of a redirect service for short URLs.
+- Allow users to submit a custom short URL.
 

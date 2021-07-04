@@ -74,7 +74,7 @@ $app->post('/api/shortener/decode',function(Request $request, Response $response
     /** @var UrlShortenerController $urlShortenerController */
     $urlShortenerController = $this->get(UrlShortenerController::class);
     $body = $request->getParsedBody();
-    $urlToDecode = $body['urlToEncode'] ?? "";
+    $urlToDecode = $body['urlToDecode'] ?? "";
 
     return $urlShortenerController->decode($urlToDecode, $response);
 });
