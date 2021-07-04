@@ -46,7 +46,7 @@ that can then be decoded by the Decode method of this API.
 ## Decode
 Accepts a full URL or a 6 character identifier provided by the Encode function of the API and returns the original long URL used to generate it.
 
-**URL**: `/api/shortener/decode?urlToDecode=<URL_TO_DECODE>`
+**URL**: `/api/shortener/decode`
 
 **Method**: `POST`
 
