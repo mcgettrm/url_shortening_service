@@ -6,7 +6,7 @@ I've really enjoyed working on your test. However, I haven't finished it!
 
 I've decided to submit what I have as I suspect I have spent more time now than you would have originally intended that I spend.
 So, it's worth noting that the repository is not implemented (which I think is okay because your brief steered me away from
-using any persistence data) and also I'd have liked to have implemented a validation class (but this really feels like a nice-to-have).
+using any persistent data) and also I'd have liked to have implemented a validation class (but this really feels like a nice-to-have).
 
 There is a Lucid Chart pdf export of my Classmap UML in the misc folder so that you have an idea of what I was trying to achieve. This would be a good place to start to give you a high level overview of the application.
 
