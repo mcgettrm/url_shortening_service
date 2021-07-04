@@ -37,15 +37,15 @@ Content-Length: 233
 **Content**:
 ``` 
 {
-   encodedUrl: <ENCODED_URL>
-} 
+    "shortenedUrl": "http://url_shortening_service/YTlkMT"
+}
 ```
 
 ### RESPONSE (FAILURE):
 
 **Status Code**: 400 Bad Request
 
-**Condition**: Input Successfully Decoded.
+**Condition**: Input Could Not Be Encoded.
 
 **Content**:
 ``` 
