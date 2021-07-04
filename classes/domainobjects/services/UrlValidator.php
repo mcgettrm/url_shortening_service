@@ -3,9 +3,23 @@ namespace UrlShortener\DomainObjects\Services;
 
 use UrlShortener\Config;
 
+/**
+ * Note: this class has not been implemented
+ * Class UrlValidator
+ * @package UrlShortener\DomainObjects\Services
+ */
 class UrlValidator
 {
+    /**
+     * Application's configuration object'
+     * @var Config
+     */
     private Config $config;
+
+    /**
+     * UrlValidator constructor.
+     * @param Config $config
+     */
     public function __construct(Config $config){
         $this->config = $config;
     }

@@ -6,9 +6,22 @@ use UrlShortener\DomainObjects\Models\ShortLink;
 
 class ShortLinkRepository
 {
+    /**
+     * In the absence of persistence data, this array is effectively the persistence
+     * @var array
+     */
     private array $shortLinksArray;
+
+    /**
+     * The application's config object
+     * @var Config
+     */
     private Config $config;
 
+    /**
+     * ShortLinkRepository constructor.
+     * @param Config $config
+     */
     public function __construct(Config $config){
         $this->config = $config;
         $this->loadAll();
@@ -33,6 +46,12 @@ class ShortLinkRepository
         $this->shortLinksArray;
     }
 
+    /**
+     * Create a new entry in persistence
+     * @param string $identifier
+     * @param string $longUrl
+     * @param string $shortUrl
+     */
     public function create(string $identifier,string $longUrl,string $shortUrl){
         $this->shortLinksArray[] = [$identifier,$longUrl, $shortUrl];
         $this->persist();
@@ -58,10 +77,20 @@ class ShortLinkRepository
         return false;
     }
 
+    /**
+     * Update the passed shortlink's entry in persistence
+     * @param ShortLink $shortLink
+     * @return bool
+     */
     public function update(ShortLink $shortLink):bool{
         return true;
     }
 
+    /**
+     * Delete the passed shortlink from presistence
+     * @param ShortLink $shortLink
+     * @return bool
+     */
     public function delete(ShortLink $shortLink):bool{
         return true;
     }

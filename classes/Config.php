@@ -1,6 +1,11 @@
 <?php
 namespace UrlShortener;
 
+/**
+ * Encapsulates variables that might change based on various server/administrator/deployment specific requirements
+ * Class Config
+ * @package UrlShortener
+ */
 class Config
 {
     /**

@@ -7,9 +7,23 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 class UrlShortenerController
 {
+    /**
+     * Shortening Service that is persistent and view agnostic
+     * @var UrlShortenerService
+     */
     private UrlShortenerService $urlShortenerService;
+
+    /**
+     * Validation service for handling incoming urls
+     * @var UrlValidator
+     */
     private UrlValidator $urlValidator;
 
+    /**
+     * UrlShortenerController constructor.
+     * @param UrlShortenerService $urlShortenerService
+     * @param UrlValidator $urlValidator
+     */
     public function __construct(
         UrlShortenerService $urlShortenerService,
         UrlValidator $urlValidator

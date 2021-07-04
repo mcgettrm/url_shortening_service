@@ -7,9 +7,23 @@ use UrlShortener\Repositories\ShortLinkRepository;
 
 class UrlShortenerService
 {
+    /**
+     * Adapter for persistent storage of shortlink objects
+     * @var ShortLinkRepository
+     */
     private ShortLinkRepository $shortLinkRepository;
+
+    /**
+     * Application's configuration object
+     * @var Config
+     */
     private Config $config;
 
+    /**
+     * UrlShortenerService constructor.
+     * @param Config $config
+     * @param ShortLinkRepository $shortLinkRepository
+     */
     public function __construct(
         Config $config,
         ShortLinkRepository $shortLinkRepository

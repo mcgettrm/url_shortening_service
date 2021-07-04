@@ -1,6 +1,11 @@
 <?php
 namespace UrlShortener\DomainObjects\Models;
 
+/**
+ * This class represents the concept of a shortlink within our application
+ * Class ShortLink
+ * @package UrlShortener\DomainObjects\Models
+ */
 class ShortLink
 {
     private string $identifier = "";
