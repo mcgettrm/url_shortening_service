@@ -1,13 +1,17 @@
 # URL Shortening Service
-Hello Ampersand, I've really enjoyed working on your test. However, I haven't finished it! 
+```
+Hello Ampersand, 
+
+I've really enjoyed working on your test. However, I haven't finished it! 
 
 I've decided to submit what I have as I suspect I have spent more time now than you would have originally intended that I spend.
 So, it's worth noting that the repository is not implemented (which I think is okay because your brief steered me away from
 using any persistence data) and also I'd have liked to have implemented a validation class (but this really feels like a nice-to-have).
 
-I'm attaching the Lucid Chart pdf UML that I drew up so that you have an idea of what I was trying to achieve. 
+There is a Lucid Chart pdf export of my Classmap UML in the misc folder so that you have an idea of what I was trying to achieve. This would be a good place to start to give you a high level overview of the application.
 
 I hope you enjoy reviewing this as much as I enjoyed tinkering with it. 
+```
 
 # Terminology
 Throughout the code comments and the documentation, several phrases are used repeatedly. For clarity, the meaning of those phrases is covered here:
@@ -25,7 +29,7 @@ Please find supporting documentation in the `misc` folder for your perusal.
 ### API_DOCUMENTATION.md (For Service Consumers)
 Contains information relevant for consumers of the API.
 ### REQUIREMENTS.md (For Maintenance and QA)
-The original brief for this task
+The original brief for this task.
 ### URL Shortening Classmap UML.pdf (For Maintenance)
 This contains the original application plan. It was modified and updated throughout development. It includes classes and methods that haven't been implemented yet. 
 
