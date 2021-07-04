@@ -93,8 +93,6 @@ class UrlShortenerService
      * @param string $urlToEncode
      * @param ShortLink $shortLink
      * @param int $offset
-     * @param $identifier
-     * @param $encodedUrl
      * @return string
      */
     private function handleDuplicateIdentifier(

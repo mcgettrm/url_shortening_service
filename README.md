@@ -11,6 +11,12 @@ I hope you enjoy reviewing this as much as I enjoyed tinkering with it.
 
 # DOCUMENTATION
 Please find supporting documentation in the `misc` folder for your perusal. 
+### API_DOCUMENTATION.md
+Contains information relevant for consumers of the API.
+### REQUIREMENTS.md
+The original brief for this task
+### URL Shortening UML.pdf
+This contains the original application plan. It was modified throughout development. 
 
 # Important links
 Git Repository: https://github.com/mcgettrm/url_shortening_service
